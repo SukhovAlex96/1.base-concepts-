@@ -37,3 +37,7 @@ function makeWork (arrOfArr, func) {
   }
   return max;
 }
+
+function worker2 (...arr) {
+  return getArrayParams(arr).max - getArrayParams(arr).min;
+}
