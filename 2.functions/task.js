@@ -8,7 +8,7 @@ function getArrayParams(...arr) {
 
   for (let i = 0; i < arr.length; i++){
     sum = sum + arr[i];
-    if (arr[i > max]){
+    if (arr[i] > max){
       max = arr[i];
     }
     if (arr[i] < min){
@@ -32,8 +32,9 @@ function summElementsWorker(...arr) {
 }
 
 function differenceMaxMinWorker (...arr) {
-  let min = 0;
-  let max = 0;
+  let min = Infinity;
+  let max = -Infinity;
+  let empty = 0;
 
   for (let i = 0; i < arr.length; i++){
     if (i > max){
@@ -41,6 +42,9 @@ function differenceMaxMinWorker (...arr) {
     }
     if (i < min){
       min = arr[i];
+    }
+    if (i = 0){
+      empty =arr[i];
     }
   }
   
@@ -65,11 +69,15 @@ function differenceEvenOddWorker (...arr){
 function averageEvenElementsWorker (...arr){
   let sumEvenElement = 0;
   let countEvenElement = 0;
+  let empty = 0;
 
   for(let i = 0; i < arr.length; i++){
-    if (i % 2 !== 0){
+    if (i % 2 === 0){
       sumEvenElement += arr[i];
       countEvenElement++;
+    }
+    if (i = 0){
+      empty =arr[i];
     }
   }
 
@@ -80,24 +88,18 @@ function makeWork(func) {
   func();
  
   // Задание №3
- function arrOfArr(){
-   let maxWorkerResult = -Infinity;
-   for (let num of arr){
-     maxWorkerResult = num;
-   } 
-}
- function summElementsWorker() {
-   console.log("Насадка суммирования значения");
- } 
- function differenceMaxMinWorker() {
-   console.log("Насадка разницы элементов");
- }
- function differenceEvenOddWorker() {
-   console.log("Насадка разницы четных и нечетных элементов");
- }
- function averageEvenElementsWorker() {
-   console.log("Насадка среднего значения четных элементов");
- }
- 
- return [summElementsWorker, differenceMaxMinWorker, differenceEvenOddWorker, averageEvenElementsWorker];
-}
+  function makeWork(func,arrOfArr){
+    let maxWorkerResult = - Infinity;
+  
+    const arr = [summElementsWorker, differenceMaxMinWorker, differenceEvenOddWorker, averageEvenElementsWorker];
+    arrOfArr(...arr);
+    for (let i = 0; i < arr.length; i++) 
+      if ( i > maxWorkerResult){
+        maxWorkerResult = arr[i];
+      }
+    func()
+  }
+  makeWork(summElementsWorker);
+  makeWork(differenceMaxMinWorker);
+  makeWork(differenceEvenOddWorker);
+  makeWork(averageEvenElementsWorker);
