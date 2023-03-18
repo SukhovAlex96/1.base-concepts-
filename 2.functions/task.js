@@ -1,5 +1,6 @@
 "use strict"
 // Задание №1
+
 function getArrayParams(...arr) {
   let min = Infinity;
   let max = -Infinity;
@@ -22,13 +23,14 @@ function getArrayParams(...arr) {
 
 
 // Задание №2
+
 function summElementsWorker(...arr) {
   let sum = 0;
      for (let i = 0; i < arr.length; i++){
       sum = sum + arr[i];
      }
 
-  return sum;
+  return {sum: sum};
 }
 
 function differenceMaxMinWorker (...arr) {
@@ -43,17 +45,16 @@ function differenceMaxMinWorker (...arr) {
     if (i < min){
       min = arr[i];
     }
-    if (i = 0){
-      empty =arr[i];
-    }
   }
+  empty = parseFloat((min - max).toFixed(2));
   
-  return max - min;
+  return {empty: empty};
 }
 
 function differenceEvenOddWorker (...arr){
   let sumEvenElement = 0;
   let sumOddElement = 0;
+  let difference = 0;
   
   for (let i = 0; i < arr.length; i++){
     if (i % 2 == 0){
@@ -62,8 +63,8 @@ function differenceEvenOddWorker (...arr){
       sumEvenElement += arr[i];
     }
   } 
-
-  return sumOddElement - sumEvenElement;
+  difference = parseFloat((sumOddElement - sumEvenElement).toFixed(2));
+  return {difference: difference};
 }
 
 function averageEvenElementsWorker (...arr){
@@ -73,33 +74,44 @@ function averageEvenElementsWorker (...arr){
 
   for(let i = 0; i < arr.length; i++){
     if (i % 2 === 0){
+      countEvenElement +=1; 
       sumEvenElement += arr[i];
-      countEvenElement++;
-    }
-    if (i = 0){
-      empty =arr[i];
     }
   }
+  }
+    empty = parseFloat((sumEvenElement / countEvenElement).toFixed(2));
 
-    return sumEvenElement / countEvenElement;
+    return {empty: empty};
+
+
+// Задание №3
+
+function makeWork(func,arrOfArr){
+  let maxWorkerResult = -Infinity;
+  for (let i = 0; i < arrOfArr.length; i++) {
+    const summElementsWorker = func(arrOfArr[i]);
+    if (summElementsWorker > maxWorkerResult) {
+      maxWorkerResult = summElementsWorker;
+    }
+  }
+    for (let i = 0; i < arrOfArr.length; i++) {
+    const differenceMaxMinWorker = func(arrOfArr[i]);
+    if (differenceMaxMinWorker > maxWorkerResult) {
+      maxWorkerResult = differenceMaxMinWorker;
+  }
 }
-
-function makeWork(func) {
-  func();
- 
-  // Задание №3
-  function makeWork(func,arrOfArr){
-    let maxWorkerResult = - Infinity;
-  
-    const arr = [summElementsWorker, differenceMaxMinWorker, differenceEvenOddWorker, averageEvenElementsWorker];
-    arrOfArr(...arr);
-    for (let i = 0; i < arr.length; i++) 
-      if ( i > maxWorkerResult){
-        maxWorkerResult = arr[i];
-      }
-    func()
+      for (let i = 0; i < arrOfArr.length; i++) {
+    const differenceEvenOddWorker = func(arrOfArr[i]);
+    if (differenceEvenOddWorker > maxWorkerResult) {
+      maxWorkerResult = differenceEvenOddWorker;
+    }
   }
-  makeWork(summElementsWorker);
-  makeWork(differenceMaxMinWorker);
-  makeWork(differenceEvenOddWorker);
-  makeWork(averageEvenElementsWorker);
+        for (let i = 0; i < arrOfArr.length; i++) {
+    const averageEvenElementsWorker = func(arrOfArr[i]);
+    if (averageEvenElementsWorker > maxWorkerResult) {
+      maxWorkerResult = averageEvenElementsWorker;
+  }
+}       
+
+  return maxWorkerResult;
+}
