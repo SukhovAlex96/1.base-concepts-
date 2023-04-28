@@ -1,21 +1,29 @@
 function Student(name, gender, age) {
     this.name = name;
     this.gender = gender;
-    this.age = age;
-    this.marks = [];
+    this.age = age; 
 }
 
 Student.prototype.setSubject = function (subjectName) {
   this.subject = subjectName;
 }
 
-Student.prototype.addMarks = function (...marksToAdd) {
-  (this.marksToAdd === undefined) ? this.marksToAdd = [...marks] : this.marks.push(...marksToAdd);
+Student.prototype.addMarks = function (mark){
+    if (this.marks === undefined){
+      this.marks = [];  
+    }
+    this.marks.push(mark);
+}
+
+Student.prototype.addMarks = function (...marks) {
+  marks.forEach(mark => this.addMarks(mark));
 }
 
 Student.prototype.getAverage = function () {
   let sum = 0;
-  this.marks.forEach(item = sum += item);
+  for (let mark of this.marks){
+    sum += mark;
+  }
   return sum / this.marks.length;
 }
 
