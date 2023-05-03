@@ -9,21 +9,16 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (mark){
-    if (this.marks === undefined){
-      this.marks = [];  
-    }
-    this.marks.push(mark);
+    (this.marks === undefined) ? this.marks = [mark] : this.marks.push(mark);
 }
 
-Student.prototype.addMarks = function (...marks) {
-  marks.forEach(mark => this.addMarks(mark));
+Student.prototype.addMarks = function (...marks){
+  (this.marks === undefined) ? this.marks = [...marks] : this.marks.push(...marks);
 }
 
 Student.prototype.getAverage = function () {
   let sum = 0;
-  for (let mark of this.marks){
-    sum += mark;
-  }
+  this.marks.forEach(item => sum += item);
   return sum / this.marks.length;
 }
 
