@@ -31,8 +31,8 @@ class Triangle{
             return this.a + this.b + this.c;
         }
         get area(){
-            let p = perimeter / 2;
-            return Number(Math.sqrt (p * (p - this.a)) * (p * (p - this.b)) * (p * (p - this.c)).toFixed(3));
+            let p = this.perimeter / 2;
+            return Number(Math.sqrt (p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3));
         }
     }
     function getTriangle(a, b, c) {
