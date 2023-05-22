@@ -23,7 +23,7 @@ class Triangle{
         this.a = a;
         this.b = b;
         this.c = c;
-        if ((a + b) > c || (a + c) > b || (b + c) > a){
+        if ((a + b) < c || (a + c) < b || (b + c) < a){
             throw new Error ("Треугольник с такими сторонами не существует");
         }
     }
@@ -31,8 +31,8 @@ class Triangle{
             return this.a + this.b + this.c;
         }
         get area(){
-            let p = (this.a + this.b + this.c) / 2;
-            return Number(Math.sqrt (p * (p - this.a)) * (p * (p - this.b)) * (p * (p - this.c)) / toFixed(3));
+            let p = perimeter / 2;
+            return Number(Math.sqrt (p * (p - this.a)) * (p * (p - this.b)) * (p * (p - this.c)).toFixed(3));
         }
     }
     function getTriangle(a, b, c) {
