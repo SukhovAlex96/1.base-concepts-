@@ -17,7 +17,7 @@ removeClock(time){
     return this.alarmCollection = this.alarmCollection.filter(el => el.time != time);
 }
 getCurrentFormattedTime(){
-    return new Date().toLocaleDateString("ru - Ru", {
+    return new Date().toLocaleTimeString("ru-Ru", {
         hour: "2-digit", 
         minute: "2-digit",
     });
